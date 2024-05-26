@@ -3,6 +3,8 @@ import WorkoutForm from '../components/WorkoutForm'
 import Navbar from '../components/Navbar'
 
 import { useWorkoutsContext } from '../hooks/useWorkoutContext'
+import CategoryList from '../components/CategoryList'
+import AddCategoryForm from '../admin/AddCategoryForm'
 
 
 const Home = () => {
@@ -44,6 +46,8 @@ const Home = () => {
       <div className='body'>
 
         <h1>Home Page </h1>
+        <AddCategoryForm />
+        <CategoryList />
         <WorkoutForm />
         <ul>
           {workouts && workouts.map((workout) => (
