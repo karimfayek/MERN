@@ -8,8 +8,8 @@ import Register from './components/Register';
 import Login from './components/Login';
 import { loadUser } from './actions/authActions';
 import setAuthToken from './utils/setAuthToken';
-import Navbar from './components/Navbar';
 import Layout from './components/Layout';
+import SellerRegister from './components/SellerRegister';
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -28,6 +28,7 @@ function App() {
               <Route index element={<Home />} />
               <Route path="register" element={<Register />} />
               <Route path="login" element={<Login />} />
+              <Route path="seller-register" element={<SellerRegister />} />
             </Route>
           </Routes>
         </BrowserRouter>

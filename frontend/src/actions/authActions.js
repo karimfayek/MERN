@@ -33,7 +33,7 @@ export const register = (formData) => async (dispatch) => {
 
 export const login = (formData) => async (dispatch) => {
   try {
-    const res = await axios.post('/api/auth/login', formData);
+    const res = await axios.post('http://localhost:4000/api/auth/login', formData);
     dispatch(loginSuccess(res.data));
     dispatch(loadUser());
   } catch (err) {

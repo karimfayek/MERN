@@ -7,6 +7,7 @@ const router = express.Router()
 // GET all categorys
 router.get('/', getcategories)
 
+
 // GET a single workout
 router.get('/:id', getcategory)
 
