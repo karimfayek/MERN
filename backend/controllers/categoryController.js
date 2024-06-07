@@ -1,4 +1,4 @@
-const Category = require('../models/categoryModel');
+const { Category } = require('../models/categoryModel');
 const Product = require('../models/productModel');
 
 async function getcategory(req, res) {
@@ -11,58 +11,24 @@ async function getcategory(req, res) {
 }
 
 // get all categorys 
-const getcategories = async (req, res) => {
-
-  try {
-    const categories = await Category.find({ parentId: null })
-      .sort({ createdAt: -1 })
-      .populate('products')
-      .populate({
-        path: 'children',
-        populate: { path: 'parentId' } // populate the parentId in children
-      })
-      .populate('parentId');
-      
-    res.status(200).json(categories);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Server error" });
-  }
+const getcategories = async (req , res) => {
+    const categorys = await Category.find({}).sort({createdAt : -1}).populate('products');
+   //const categorys = await category.find().populate('categories');
+  
+    res.status(200).json(categorys)
 }
 
 //create 
-const careatecategory = async (req, res) => {
-  try {
-    const { name, parentId } = req.body;
-
-    const category = new Category({ name });
-    await category.save();
-    if (parentId) {
-      const parentCategory = await Category.findById(parentId);
-      if (parentCategory) {
-        const parent = await Category.findOneAndUpdate({ _id: parentId }, {
-          children: [...parentCategory.children, category._id]
-        })
-
-        //const categorys = new Category({ name, children: [] }); 
-        await category.updateOne({
-          parentId: parentCategory._id,
-        })
-        await parent.save();
-        console.log(category)
-
-        res.json(category);
-      } 
-     
-    }else{
-      res.json(category);
+const careatecategory = async (req , res) => {
+    console.log(req.body)
+    const {catTitle} = req.body
+  
+    try {
+      const category = await Category.create({name:catTitle})
+      res.status(200).json(category)
+    } catch (error) {
+      res.status(400).json({error: error.message})
     }
-
-
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Server error" });
-  }
 }
 //update  single worlout 
 const updatecategory = async (req, res) => {
