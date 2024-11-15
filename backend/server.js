@@ -23,9 +23,9 @@ app.use((req, res, next) => {
     next()
 })
 
-// Use 'upload' middleware in your route for file upload
+// Use 'upload' middleware 
 app.post('/api/upload', upload.single('image'), (req, res) => {
-  // File has been uploaded, you can now handle the file in the request
+  // File has been uploaded
 });
 
 //routes
